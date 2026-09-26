@@ -1,0 +1,7 @@
+interface:
+  display_name: "Git Commit"
+  short_description: "Create Conventional Commits in the selected language"
+  default_prompt: "Use $git-commit to review and commit the current changes, using the language of existing commit messages unless I specify another language."
+
+policy:
+  allow_implicit_invocation: true
