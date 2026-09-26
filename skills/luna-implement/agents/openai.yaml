@@ -1,0 +1,6 @@
+interface:
+  display_name: "Luna Implement"
+  short_description: "Delegate implementation to Luna with main-agent review"
+
+policy:
+  allow_implicit_invocation: true
