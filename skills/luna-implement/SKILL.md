@@ -57,17 +57,23 @@ spawning further agents or applying this workflow recursively.
   perform additional checks to resolve gaps or concerns rather than repeating
   checks automatically. A completion claim alone is insufficient for acceptance.
   Verify combined behavior after tasks are integrated.
-- For changes affecting visible output, the main agent must directly inspect
-  the running result or current screenshots, including relevant states and
-  interactions. Workers may collect evidence, but the main agent owns visual
-  reasoning and the verdict. Code inspection or a worker's visual summary does
-  not replace this check. Nonvisual changes need no visual check.
+- The main agent decides whether visual inspection is needed based on the
+  acceptance criteria, the change's visual risk, and available evidence.
+  Changes affecting visible output do not automatically require visual
+  inspection; skip it when code review and relevant checks sufficiently
+  establish correctness. Use it when explicitly requested or when a material
+  concern about appearance or interaction remains unresolved.
+  When needed, the main agent directly inspects the running result or current
+  screenshots for the relevant states and interactions. Workers may collect
+  evidence, but the main agent owns visual reasoning and the verdict.
 - Record **PASS** only when the required checks succeed. Record **FAIL** for
   observed defects, with the failed criterion, evidence, and concrete correction.
   Send corrective work back to a Luna/max worker and verify the result again.
 - If required verification cannot run, report it as blocked and withhold PASS;
   do not treat missing evidence as an implementation defect requiring blind
   retries.
+  A visual check judged unnecessary is not blocked verification and does not
+  prevent PASS.
 - Reassess the design and task boundaries when a failure repeats. Continue
   corrective work while it makes progress toward acceptance. If the revised
   approach still makes no progress, or an external blocker or required user
