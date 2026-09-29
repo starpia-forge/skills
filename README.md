@@ -27,6 +27,7 @@ gh skill install starpia-forge/skills <skill-name> --agent codex --scope project
 | Skill | Description |
 | --- | --- |
 | [game-dev-guidelines](skills/game-dev-guidelines/SKILL.md) | Guide game component design and implementation planning, including responsibilities, dependencies, composition, and tunable gameplay data. |
+| [game-dev-visual-feedback](skills/game-dev-visual-feedback/SKILL.md) | Guide when and how to provide visual interaction cues, input responses, and state feedback in game UI and world objects. |
 | [git-commit](skills/git-commit/SKILL.md) | Review and commit changes using purpose-focused Conventional Commits in the selected language. |
 | [karpathy-guidelines](skills/karpathy-guidelines/SKILL.md) | Guide code implementation, review, and refactoring with explicit assumptions, focused changes, and verifiable outcomes. |
 | [luna-implement](skills/luna-implement/SKILL.md) | Delegate implementation to GPT-6 Luna at max effort while the main agent handles design, planning, and verification. |
