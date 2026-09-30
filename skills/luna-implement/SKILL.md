@@ -1,9 +1,15 @@
 ---
 name: luna-implement
-description: Delegate code implementation and fixes to gpt-6-luna at max effort, with main-agent planning and verification. Use when executing changes, not for analysis or planning alone.
+description: Delegate code implementation and fixes to gpt-6-luna at max effort, with main-agent planning and verification. Use only for code changes; exclude document work, skill creation or editing, 2D/3D asset creation or editing, and analysis or planning alone.
 ---
 
 # Luna Implement
+
+Apply this workflow only to code implementation and fixes, including associated
+tests and integration corrections. Do not use it for document work, skill
+creation or editing, or 2D/3D asset creation or editing, even when those outputs
+are produced through code or scripts. For mixed requests, apply this workflow
+only to the code implementation portion.
 
 Keep the user's selected main model responsible for design, planning, task
 decomposition, and acceptance. Delegate implementation and corrective edits to
@@ -12,7 +18,7 @@ implementation, plan first and delegate when implementation begins. A plan-only
 request does not authorize implementation.
 
 The main agent inspects, runs, and verifies the work and revises the design;
-workers make all implementation edits, including small fixes, tests, and
+workers make all code implementation edits, including small fixes, tests, and
 integration corrections. Do not patch implementation files directly during
 review or integration; delegate the required edits to a Luna/max worker.
 
