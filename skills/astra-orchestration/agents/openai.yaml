@@ -1,0 +1,6 @@
+interface:
+  display_name: "Astra Orchestration"
+  short_description: "Coordinate an Astra root, Sol manager, and Luna workers"
+
+policy:
+  allow_implicit_invocation: true
