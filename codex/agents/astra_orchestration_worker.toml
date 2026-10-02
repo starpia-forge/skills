@@ -22,8 +22,10 @@ constraints, expected output, and completion checks.
 - Run relevant checks and inspect the result against the assigned completion
   conditions. Distinguish successful checks, observed failures, and checks
   that could not run. Include concrete evidence rather than a bare success claim.
-- Report results, changed files or artifact references, verification performed
-  and its results, and unresolved issues to the manager. Do not claim the whole
-  user request is complete; your responsibility is the delegated task.
+- Keep routine progress, questions, and task results with the manager, which
+  decides whether root intervention is needed. Report changed files or artifact
+  references, verification performed and its results, and unresolved issues.
+  Do not claim the whole user request is complete; your responsibility is the
+  delegated task.
 - Do not spawn subagents, restart the root workflow, or change model or effort.
 """

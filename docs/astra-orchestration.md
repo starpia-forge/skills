@@ -17,10 +17,10 @@ needed.
 
 The design assigns each model the kind of work it is expected to handle well:
 
-- **Astra:** interpret ambiguous user intent, resolve important choices, and
-  judge whether the result solves the actual problem.
-- **Sol:** design the execution plan and manage delivery once the goal is clear,
-  including decomposition, local implementation decisions, review, and retries.
+- **Astra:** clarify intent, handle requirement decisions and unresolved core
+  blockers, and judge the integrated result against the user's goal.
+- **Sol:** own the full authorized execution cycle once the goal is clear,
+  including exploration, planning, implementation decisions, review, and retries.
 - **Luna:** perform defined actions whose results can be verified from the
   supplied context and completion conditions.
 
@@ -68,7 +68,7 @@ User request / existing specifications
 Astra root: clarify intent + success conditions
                  |
                  v
-Sol manager: plan + assign bounded tasks
+Sol manager: own execution cycle + assign tasks
                  |
                  v
 Luna workers: execute + run task checks <-----------+
@@ -82,41 +82,69 @@ Astra root: accept against intent -- gaps --> Sol manager
                  v
 Verified outcome + remaining limitations
 
-Escalation: worker -> manager -> root -> user when needed
+Worker questions stay with the manager unless root intervention is needed.
+Root intervention: requirement decisions or unresolved core blockers.
 Revised guidance returns down the same chain.
 ```
 
 1. **Clarify and hand off.** The root establishes scope, priorities, constraints,
    and observable success conditions, separating requirements from assumptions.
-   It resolves material ambiguity and gives one manager a proportional brief
-   with relevant sources; a separate planning document is not required.
-2. **Plan and delegate.** The manager chooses task boundaries, sequencing, and
-   verification. Each worker receives purpose, inputs, scope, expected output,
-   and completion checks. Independent work can run concurrently; dependent or
-   overlapping edits are serialized with one writer per overlapping scope.
-   Workers handle implementation and corrective edits and do not spawn agents.
+   It reuses sufficient existing specifications and gives one manager the full
+   authorized execution cycle without duplicating detailed planning. Requested
+   workflow steps, including authorized OpenSpec phases, belong to the manager;
+   phase transitions do not add root approvals. Explicit user decision gates
+   still apply.
+2. **Plan and delegate.** The manager owns exploration, decomposition, sequencing,
+   algorithms, internal data structures, module organization, test strategy,
+   and rework within the agreed external behavior and constraints. Each worker
+   receives purpose, inputs, scope, expected output, and completion checks.
+   Independent work can run concurrently; dependent or overlapping edits are
+   serialized. Workers handle implementation and corrective edits and do not
+   spawn agents.
 3. **Escalate or revise.** Workers return missing context and decisions beyond
-   their brief to the manager. Routine execution decisions stay there. Changes
-   to goals, scope, priorities, success conditions, significant design tradeoffs,
-   and unresolved reasoning blockers go to the root with evidence and impact.
-   The root asks the user when material intent remains unresolved. Affected
-   work pauses until guidance returns; independent work may continue. User
-   feedback updates the brief and propagates to affected workers.
+   their brief to the manager. The manager resolves internal tradeoffs. Root
+   intervention is reserved for conflicting or materially unclear requirements,
+   changes beyond the agreed goal, scope, priorities, external contract,
+   constraints, or success conditions, and core blockers that remain unresolved
+   after investigation and feasible changes of approach and require root judgment
+   or user input. The manager handles execution problems, including external
+   blockers, within its authority and available means. Design significance alone
+   is not an escalation trigger. Affected work pauses until root guidance returns;
+   independent work may continue. New user feedback updates the brief and
+   propagates to affected workers.
 4. **Verify and correct.** Workers return artifacts and check evidence. The
    manager reviews actual results and combined behavior, sends corrections
    with the failed condition, and revises the approach if failures repeat.
    Checks that could not run are reported separately from observed defects.
-5. **Accept.** The root inspects the integrated result against the latest user
-   requirements, reuses sufficient evidence, and investigates important gaps.
-   Missing requirements return to the manager. Completion requires required
-   work and verification to be resolved, not merely a worker's success claim.
+5. **Accept.** The manager submits one concise handoff mapping requirements to
+   outcomes and evidence, with artifact references, consequential implementation
+   choices, verification results, and unresolved issues. The root starts its
+   acceptance review from that handoff and inspects artifacts or runs checks
+   for missing or inconsistent evidence, consequential unresolved questions,
+   or an explicit user request. It avoids a duplicate full review when evidence
+   is sufficient. Gaps return to the manager, which owns corrections through
+   verification. Required work and verification must be resolved for completion.
+
+Between handoff and acceptance, the root waits for a decision request or the
+integrated result. Routine worker reports, logs, intermediate artifacts, and
+phase progress stay with the manager. The root uses notifications or the
+runtime's waiting mechanism within responsiveness limits instead of repeated
+status polling, and does not review implementation in parallel. Required user
+updates use already available status. New user input and actual decision
+requests remain actionable while work proceeds.
+
+These rules aim to reduce root coordination work. If the runtime repeatedly
+resumes the root for waiting or notifications, instructions alone may not remove
+that overhead; execution traces are needed to distinguish it from decisions
+and verification.
 
 The [skill definition](../skills/astra-orchestration/SKILL.md) and linked agent
 definitions specify the full role boundaries.
 
 ## Benchmark summary
 
-One OpenSpec implementation task was run once per condition on 2026-10-01.
+One OpenSpec implementation task was run once per condition on 2026-10-01,
+using revision `5abeb9b` before the autonomy and reporting changes described above.
 All roots used Astra/medium. Times are rounded whole-tree generation durations;
 costs are calculated API-equivalent USD, not subscription charges. The
 no-skill control omitted the two tested skills but retained standard OpenSpec
