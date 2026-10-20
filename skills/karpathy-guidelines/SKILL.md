@@ -20,16 +20,7 @@ license: MIT
 
 ## 2. Simplicity First
 
-**Keep the solution clear and focused on current requirements.**
-
-- Implement the requested behavior without speculative features or extension
-  points.
-- Judge abstractions by their present benefit, such as clearer responsibilities,
-  testability, or reduced duplication of the same rule, rather than reuse count.
-- Prefer clear, maintainable code over minimum line count. Add configuration
-  when current requirements need it.
-- Handle failures supported by the component's contracts and operating
-  environment; avoid defensive branches for unsupported hypothetical scenarios.
+**Follow YAGNI principles, and prefer one-liner solutions.**
 
 ## 3. Surgical Changes
 
